@@ -2,7 +2,7 @@
 //  APINetworkRequestController.swift
 //  inventoryApp
 //
-//  Created by Conner Dougherty on 6/1/20.
+//  Created by Kaya Clickon 6/1/20.
 //  Copyright © 2020 Kaya Click. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ class APINetworkRequestController {
     var baseURL = "https://api.upcitemdb.com/prod/trial/lookup?upc="
     
     
-    //Makes request using UPCITEMDB API to retreive 
+    //Makes request using UPCITEMDB API to retreive
     func makeUPCRequest(_ UPC: String, comp: @escaping (Bool, NSDictionary) -> ()) {
         let url = baseURL + UPC
         let request = URLRequest(url: URL(string: url)!)

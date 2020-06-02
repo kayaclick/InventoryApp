@@ -2,7 +2,7 @@
 //  MainVC.swift
 //  inventoryApp
 //
-//  Created by Conner Dougherty on 5/20/20.
+//  Created by Kaya Click on 5/20/20.
 //  Copyright © 2020 Kaya Click. All rights reserved.
 //
 
