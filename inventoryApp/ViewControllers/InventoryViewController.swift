@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 class InventoryViewController: UIViewController {
+    
+    @IBOutlet weak var barBackButton: UIBarButtonItem!
+    @IBOutlet weak var testBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -23,6 +27,26 @@ class InventoryViewController: UIViewController {
         
         
         
+    }
+    
+    
+    @IBAction func testQuery(_ sender: Any) {
+        
+        let upc = "885909950805"
+        let response = APINetworkRequestController().makeUPCRequest(upc) { (success, json) in
+            
+            if(success) {
+                print(json)
+            } else {
+                print("error!")
+            }
+            
+        }
+    }
+    
+    //Goodbye
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

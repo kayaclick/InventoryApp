@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1349E96C2485EEF500AC53EF /* APINetworkRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349E96B2485EEF500AC53EF /* APINetworkRequestController.swift */; };
 		1387598E2476419F00740BFC /* Inventory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1387598D2476419F00740BFC /* Inventory.storyboard */; };
 		13875990247641F900740BFC /* InventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1387598F247641F900740BFC /* InventoryViewController.swift */; };
 		138FAA212476338D00E38691 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FAA202476338D00E38691 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1349E96B2485EEF500AC53EF /* APINetworkRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkRequestController.swift; sourceTree = "<group>"; };
 		1387598D2476419F00740BFC /* Inventory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inventory.storyboard; sourceTree = "<group>"; };
 		1387598F247641F900740BFC /* InventoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewController.swift; sourceTree = "<group>"; };
 		138FAA1D2476338D00E38691 /* inventoryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inventoryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1349E96A2485EED600AC53EF /* APINetworkRequest */ = {
+			isa = PBXGroup;
+			children = (
+				1349E96B2485EEF500AC53EF /* APINetworkRequestController.swift */,
+			);
+			path = APINetworkRequest;
+			sourceTree = "<group>";
+		};
 		138FAA142476338D00E38691 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +85,7 @@
 				138FAA242476338D00E38691 /* ViewController.swift */,
 				138FAA292476338E00E38691 /* Assets.xcassets */,
 				138FAA2E2476338E00E38691 /* Info.plist */,
+				1349E96A2485EED600AC53EF /* APINetworkRequest */,
 				138FAA35247634F100E38691 /* ViewControllers */,
 				138FAA342476341800E38691 /* Storyboards */,
 			);
@@ -185,6 +196,7 @@
 				138FAA212476338D00E38691 /* AppDelegate.swift in Sources */,
 				138FAA232476338D00E38691 /* SceneDelegate.swift in Sources */,
 				13AB3D692476449E000A7419 /* ScanViewController.swift in Sources */,
+				1349E96C2485EEF500AC53EF /* APINetworkRequestController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +343,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y75D95Z7B8;
 				INFOPLIST_FILE = inventoryApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -349,6 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y75D95Z7B8;
 				INFOPLIST_FILE = inventoryApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

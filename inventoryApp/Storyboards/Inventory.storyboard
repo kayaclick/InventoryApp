@@ -14,9 +14,36 @@
                     <view key="view" contentMode="scaleToFill" id="gSg-So-6hy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MpE-bW-aVR">
+                                <rect key="frame" x="0.0" y="35" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Inventory" id="ghB-VP-z00">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="zoe-H4-OZY">
+                                            <connections>
+                                                <action selector="backButtonPressed:" destination="zOt-Q7-8lv" id="tWV-w4-Rb9"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SgP-BA-vG2">
+                                <rect key="frame" x="173" y="416" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="testQuery:" destination="zOt-Q7-8lv" eventType="touchUpInside" id="qN7-2B-VPk"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="J2E-Am-J7l"/>
                     </view>
+                    <connections>
+                        <outlet property="barBackButton" destination="zoe-H4-OZY" id="6Wc-dW-Tyn"/>
+                        <outlet property="testBtn" destination="SgP-BA-vG2" id="lw7-cV-HpM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49x-54-ahX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

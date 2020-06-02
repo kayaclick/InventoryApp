@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class SettingsViewController: UIViewController {
+
+    @IBOutlet weak var barBackButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -23,6 +26,12 @@ class SettingsViewController: UIViewController {
         
         
         
+    }
+    
+    
+    //Goodbye
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
