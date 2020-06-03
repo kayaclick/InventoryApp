@@ -21,6 +21,8 @@
 		13AB3D692476449E000A7419 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AB3D682476449E000A7419 /* ScanViewController.swift */; };
 		13AB3D6B2476451B000A7419 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AB3D6A2476451B000A7419 /* SettingsViewController.swift */; };
 		13AB3D6D24764534000A7419 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13AB3D6C24764534000A7419 /* Settings.storyboard */; };
+		13BDDBD0248756A000139654 /* InventoryItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13BDDBCE248756A000139654 /* InventoryItem.xcdatamodeld */; };
+		13BDDBD224875C6300139654 /* ItemMaintenanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		13AB3D682476449E000A7419 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		13AB3D6A2476451B000A7419 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		13AB3D6C24764534000A7419 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		13BDDBCF248756A000139654 /* InventoryItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InventoryItem.xcdatamodel; sourceTree = "<group>"; };
+		13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMaintenanceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 		138FAA1F2476338D00E38691 /* inventoryApp */ = {
 			isa = PBXGroup;
 			children = (
+				13BDDBCD2487566E00139654 /* Data */,
 				138FAA202476338D00E38691 /* AppDelegate.swift */,
 				138FAA222476338D00E38691 /* SceneDelegate.swift */,
 				138FAA242476338D00E38691 /* ViewController.swift */,
@@ -109,10 +114,19 @@
 			children = (
 				138FAA362476350300E38691 /* MainVC.swift */,
 				1387598F247641F900740BFC /* InventoryViewController.swift */,
+				13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */,
 				13AB3D682476449E000A7419 /* ScanViewController.swift */,
 				13AB3D6A2476451B000A7419 /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		13BDDBCD2487566E00139654 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				13BDDBCE248756A000139654 /* InventoryItem.xcdatamodeld */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,8 +207,10 @@
 				138FAA372476350300E38691 /* MainVC.swift in Sources */,
 				13AB3D6B2476451B000A7419 /* SettingsViewController.swift in Sources */,
 				13875990247641F900740BFC /* InventoryViewController.swift in Sources */,
+				13BDDBD0248756A000139654 /* InventoryItem.xcdatamodeld in Sources */,
 				138FAA212476338D00E38691 /* AppDelegate.swift in Sources */,
 				138FAA232476338D00E38691 /* SceneDelegate.swift in Sources */,
+				13BDDBD224875C6300139654 /* ItemMaintenanceViewController.swift in Sources */,
 				13AB3D692476449E000A7419 /* ScanViewController.swift in Sources */,
 				1349E96C2485EEF500AC53EF /* APINetworkRequestController.swift in Sources */,
 			);
@@ -396,6 +412,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		13BDDBCE248756A000139654 /* InventoryItem.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				13BDDBCF248756A000139654 /* InventoryItem.xcdatamodel */,
+			);
+			currentVersion = 13BDDBCF248756A000139654 /* InventoryItem.xcdatamodel */;
+			path = InventoryItem.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 138FAA152476338D00E38691 /* Project object */;
 }

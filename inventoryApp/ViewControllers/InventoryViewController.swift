@@ -12,10 +12,9 @@ import UIKit
 class InventoryViewController: UIViewController {
     
     @IBOutlet weak var barBackButton: UIBarButtonItem!
-    @IBOutlet weak var testBtn: UIButton!
-    var newlyScannedItem: String = ""
+    @IBOutlet weak var barAddItemButton: UIBarButtonItem!
     
-    @IBOutlet weak var testLbl: UILabel!
+    var newlyScannedItem: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +26,6 @@ class InventoryViewController: UIViewController {
     }
     
     func loadData() {
-        if (newlyScannedItem != "") {
-            testLbl.text = newlyScannedItem
-        }
-        
         
     }
     
@@ -49,7 +44,16 @@ class InventoryViewController: UIViewController {
         }
     }
     
-    //Goodbye
+    //MARK: Add Item
+    @IBAction func barAddItemPressed(_ sender: Any) {
+        //Present new item view
+        let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil) //remember: sb is just sb file
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController //id is for VC; as! for VC Class
+        viewController.modalPresentationStyle = .overCurrentContext
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    //MARK: Goodbye
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
