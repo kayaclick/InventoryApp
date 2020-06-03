@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import AVFoundation
+import Vision
+
 
 class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
@@ -21,7 +23,19 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     @IBOutlet weak var barButtonBack: UIBarButtonItem!
     
-    //MARK: ViewController INIT
+    lazy var detectBarcodeRequest: VNDetectBarcodesRequest = {
+        return VNDetectBarcodesRequest(completionHandler: { (request, error) in
+            guard error == nil else {
+                self.showAlert(withTitle: "barcode Error", message: error!.localizedDescription)
+                return
+            }
+            
+            self.processClassification(for: request)
+        })
+    }()
+    
+    
+    //MARK: ViewController Init
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -42,7 +56,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         addShutterButton()
     }
     
-    //MARK: Camera Logic
+    //MARK: Camera Init
     private func setupCameraLiveView() {
         // Set up the camera session.
         captureSession = AVCaptureSession()
@@ -92,19 +106,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
 
     
-    
-    @objc func captureImage() {
-        let settings = AVCapturePhotoSettings()
-        captureOutput?.capturePhoto(with: settings, delegate: self)
-    }
 
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        if let imageData = photo.fileDataRepresentation(),
-            let image = UIImage(data: imageData) {
-            // TODO: Process image.
-        }
-    }
-    
     
     private func addShutterButton() {
         let width: CGFloat = 75
@@ -123,6 +125,33 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     
+    //MARK: Photo Capture Logic
+    
+    @objc func captureImage() {
+        let settings = AVCapturePhotoSettings()
+        captureOutput?.capturePhoto(with: settings, delegate: self)
+    }
+
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let imageData = photo.fileDataRepresentation(),
+            let image = UIImage(data: imageData) {
+                
+            guard let ciImage = CIImage(image: image) else {
+                fatalError("Unable to create image!")
+            }
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let handler = VNImageRequestHandler(ciImage: ciImage, orientation: CGImagePropertyOrientation.up, options: [:])
+
+                do {
+                    try handler.perform([self.detectBarcodeRequest])
+                } catch {
+                    self.showAlert(withTitle: "Error Decoding Barcode", message: error.localizedDescription)
+                }
+            }
+            
+        }
+    }
     
     
     
@@ -191,6 +220,20 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         present(alertController, animated: true)
     }
     
+    func processClassification(for request: VNRequest) {
+        DispatchQueue.main.async {
+            if let bestResult = request.results?.first as? VNBarcodeObservation,
+                let payload = bestResult.payloadStringValue {
+                self.showInfo(for: payload)
+            } else {
+                self.showAlert(withTitle: "Unable to extract Results", message: "Cannot extract barcode info.")
+            }
+        }
+    }
+    
+    func showInfo(for payload: String) {
+        showAlert(withTitle: "SKU", message: payload)
+    }
     
     //MARK: Goodbye
     @IBAction func backButtonPressed(_ sender: Any) {
