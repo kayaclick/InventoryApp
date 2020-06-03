@@ -92,8 +92,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         captureOutput = AVCapturePhotoOutput()
         captureOutput!.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])], completionHandler: nil)
         captureSession.addOutput(captureOutput!)
-
-        // Add a preview layer.
+        
         cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         cameraPreviewLayer!.videoGravity = .resizeAspectFill
         cameraPreviewLayer!.connection?.videoOrientation = .portrait
@@ -153,6 +152,28 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
     }
     
+    func processClassification(for request: VNRequest) {
+        DispatchQueue.main.async {
+            if let bestResult = request.results?.first as? VNBarcodeObservation,
+                let payload = bestResult.payloadStringValue {
+                //self.showInfo(for: payload)
+
+                //add logic to check if item is in inventory, if not, present "add new item" screen and then pop back
+                //if item does exist, add / remove based on the (currently nonexistent) options on this screen
+                //currently just presenting inventory view
+                let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "Inventory") as! InventoryViewController
+                viewController.modalPresentationStyle = .overCurrentContext
+                viewController.newlyScannedItem = payload
+                self.present(viewController, animated: true, completion: nil)
+                
+            } else {
+                //TODO: Start timer on fail instead of immediately throwing an error
+                //Capture and process an image every .5 sec for 10 tries, after 10 fails throw an error and stop timer
+                self.showAlert(withTitle: "Unable to extract Results", message: "Cannot extract barcode info.")
+            }
+        }
+    }
     
     
     
@@ -220,16 +241,6 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         present(alertController, animated: true)
     }
     
-    func processClassification(for request: VNRequest) {
-        DispatchQueue.main.async {
-            if let bestResult = request.results?.first as? VNBarcodeObservation,
-                let payload = bestResult.payloadStringValue {
-                self.showInfo(for: payload)
-            } else {
-                self.showAlert(withTitle: "Unable to extract Results", message: "Cannot extract barcode info.")
-            }
-        }
-    }
     
     func showInfo(for payload: String) {
         showAlert(withTitle: "SKU", message: payload)

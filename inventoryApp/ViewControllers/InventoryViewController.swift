@@ -13,6 +13,9 @@ class InventoryViewController: UIViewController {
     
     @IBOutlet weak var barBackButton: UIBarButtonItem!
     @IBOutlet weak var testBtn: UIButton!
+    var newlyScannedItem: String = ""
+    
+    @IBOutlet weak var testLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +27,9 @@ class InventoryViewController: UIViewController {
     }
     
     func loadData() {
-        
+        if (newlyScannedItem != "") {
+            testLbl.text = newlyScannedItem
+        }
         
         
     }

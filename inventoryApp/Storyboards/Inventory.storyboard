@@ -36,6 +36,13 @@
                                     <action selector="testQuery:" destination="zOt-Q7-8lv" eventType="touchUpInside" id="qN7-2B-VPk"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0D-Ah-yPC">
+                                <rect key="frame" x="175" y="188" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="J2E-Am-J7l"/>
@@ -43,6 +50,7 @@
                     <connections>
                         <outlet property="barBackButton" destination="zoe-H4-OZY" id="6Wc-dW-Tyn"/>
                         <outlet property="testBtn" destination="SgP-BA-vG2" id="lw7-cV-HpM"/>
+                        <outlet property="testLbl" destination="G0D-Ah-yPC" id="7js-20-5rv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49x-54-ahX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
