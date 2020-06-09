@@ -161,11 +161,12 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 //add logic to check if item is in inventory, if not, present "add new item" screen and then pop back
                 //if item does exist, add / remove based on the (currently nonexistent) options on this screen
                 //currently just presenting inventory view
-                let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "Inventory") as! InventoryViewController
-                viewController.modalPresentationStyle = .overCurrentContext
-                viewController.newlyScannedItem = payload
-                self.present(viewController, animated: true, completion: nil)
+//                let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
+//                let viewController = storyboard.instantiateViewController(withIdentifier: "Inventory") as! InventoryViewController
+//                viewController.modalPresentationStyle = .overCurrentContext
+//                viewController.newlyScannedItem = payload
+//                self.present(viewController, animated: true, completion: nil)
+                 self.showAlert(withTitle: "UPC", message: payload)
                 
             } else {
                 //TODO: Start timer on fail instead of immediately throwing an error

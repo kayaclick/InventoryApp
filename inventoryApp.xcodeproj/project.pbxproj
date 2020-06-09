@@ -21,7 +21,8 @@
 		13AB3D692476449E000A7419 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AB3D682476449E000A7419 /* ScanViewController.swift */; };
 		13AB3D6B2476451B000A7419 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13AB3D6A2476451B000A7419 /* SettingsViewController.swift */; };
 		13AB3D6D24764534000A7419 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13AB3D6C24764534000A7419 /* Settings.storyboard */; };
-		13BDDBD0248756A000139654 /* InventoryItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13BDDBCE248756A000139654 /* InventoryItem.xcdatamodeld */; };
+		13B4BF22248CBB5A006DB1DA /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B4BF21248CBB5A006DB1DA /* DBHelper.swift */; };
+		13B4BF24248DC514006DB1DA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B4BF23248DC514006DB1DA /* Item.swift */; };
 		13BDDBD224875C6300139654 /* ItemMaintenanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +43,8 @@
 		13AB3D682476449E000A7419 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		13AB3D6A2476451B000A7419 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		13AB3D6C24764534000A7419 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		13BDDBCF248756A000139654 /* InventoryItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InventoryItem.xcdatamodel; sourceTree = "<group>"; };
+		13B4BF21248CBB5A006DB1DA /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		13B4BF23248DC514006DB1DA /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMaintenanceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,12 +59,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1349E96A2485EED600AC53EF /* APINetworkRequest */ = {
+		1349E96A2485EED600AC53EF /* HelperFunctions */ = {
 			isa = PBXGroup;
 			children = (
 				1349E96B2485EEF500AC53EF /* APINetworkRequestController.swift */,
+				13B4BF21248CBB5A006DB1DA /* DBHelper.swift */,
 			);
-			path = APINetworkRequest;
+			path = HelperFunctions;
 			sourceTree = "<group>";
 		};
 		138FAA142476338D00E38691 = {
@@ -90,7 +93,7 @@
 				138FAA242476338D00E38691 /* ViewController.swift */,
 				138FAA292476338E00E38691 /* Assets.xcassets */,
 				138FAA2E2476338E00E38691 /* Info.plist */,
-				1349E96A2485EED600AC53EF /* APINetworkRequest */,
+				1349E96A2485EED600AC53EF /* HelperFunctions */,
 				138FAA35247634F100E38691 /* ViewControllers */,
 				138FAA342476341800E38691 /* Storyboards */,
 			);
@@ -124,7 +127,7 @@
 		13BDDBCD2487566E00139654 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				13BDDBCE248756A000139654 /* InventoryItem.xcdatamodeld */,
+				13B4BF23248DC514006DB1DA /* Item.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -207,12 +210,13 @@
 				138FAA372476350300E38691 /* MainVC.swift in Sources */,
 				13AB3D6B2476451B000A7419 /* SettingsViewController.swift in Sources */,
 				13875990247641F900740BFC /* InventoryViewController.swift in Sources */,
-				13BDDBD0248756A000139654 /* InventoryItem.xcdatamodeld in Sources */,
 				138FAA212476338D00E38691 /* AppDelegate.swift in Sources */,
 				138FAA232476338D00E38691 /* SceneDelegate.swift in Sources */,
+				13B4BF24248DC514006DB1DA /* Item.swift in Sources */,
 				13BDDBD224875C6300139654 /* ItemMaintenanceViewController.swift in Sources */,
 				13AB3D692476449E000A7419 /* ScanViewController.swift in Sources */,
 				1349E96C2485EEF500AC53EF /* APINetworkRequestController.swift in Sources */,
+				13B4BF22248CBB5A006DB1DA /* DBHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,19 +416,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		13BDDBCE248756A000139654 /* InventoryItem.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				13BDDBCF248756A000139654 /* InventoryItem.xcdatamodel */,
-			);
-			currentVersion = 13BDDBCF248756A000139654 /* InventoryItem.xcdatamodel */;
-			path = InventoryItem.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 138FAA152476338D00E38691 /* Project object */;
 }

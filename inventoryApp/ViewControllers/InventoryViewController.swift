@@ -11,9 +11,16 @@ import UIKit
 
 class InventoryViewController: UIViewController {
     
+    var item: Item!
     @IBOutlet weak var barBackButton: UIBarButtonItem!
     @IBOutlet weak var barAddItemButton: UIBarButtonItem!
+    @IBOutlet weak var testUPCTextField: UILabel!
     
+    @IBOutlet weak var testBtn1: UIButton!
+    @IBOutlet weak var testBtn2: UIButton!
+    
+
+
     var newlyScannedItem: String = ""
     
     override func viewDidLoad() {
@@ -26,8 +33,23 @@ class InventoryViewController: UIViewController {
     }
     
     func loadData() {
+        //testUPCTextField.text = newlyScannedItem
+    }
+    
+    @IBAction func testBtn1Press(_ sender: Any) {
+        var doc = DBHelper().getDoc("test1")
+        doc.qty = doc.qty + 1
+        DBHelper().saveDoc("test1", doc)
         
     }
+    @IBAction func testBtn2Press(_ sender: Any) {
+        
+        //print(UserDefaults.standard.dictionary(forKey: "1"))
+        var doc = DBHelper().getDoc("test1")
+        //doc.qty = 1
+        print(doc)
+    }
+    
     
     
     @IBAction func testQuery(_ sender: Any) {
