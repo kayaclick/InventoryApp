@@ -26,6 +26,7 @@ struct Item {
             "brand":    brand,
             "asin":     asin,
             "elid":     elid
+            //catagory field
                 ]
     }
     

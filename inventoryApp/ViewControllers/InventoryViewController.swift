@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import Toast
 class InventoryViewController: UIViewController {
     
     var item: Item!
@@ -37,9 +37,10 @@ class InventoryViewController: UIViewController {
     }
     
     @IBAction func testBtn1Press(_ sender: Any) {
-        var doc = DBHelper().getDoc("test1")
-        doc.qty = doc.qty + 1
-        DBHelper().saveDoc("test1", doc)
+        //self.view.makeToast("Test")
+//        var doc = DBHelper().getDoc("test1")
+//        doc.qty = doc.qty + 1
+//        DBHelper().saveDoc("test1", doc)
         
     }
     @IBAction func testBtn2Press(_ sender: Any) {

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import Vision
-
+import Toast
 
 class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
@@ -18,18 +18,19 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var backCamera: AVCaptureDevice?
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     var captureOutput: AVCapturePhotoOutput?
-    
     var shutterButton: UIButton!
+    
+    var captureRetries = 0
+    var maxCaptureAttempts = 10 //MARK: TODO Make sys setting
     
     @IBOutlet weak var barButtonBack: UIBarButtonItem!
     
     lazy var detectBarcodeRequest: VNDetectBarcodesRequest = {
         return VNDetectBarcodesRequest(completionHandler: { (request, error) in
             guard error == nil else {
-                self.showAlert(withTitle: "barcode Error", message: error!.localizedDescription)
+                self.view.makeToast("\(error!.localizedDescription)", duration: 3.0, position: .center)
                 return
             }
-            
             self.processClassification(for: request)
         })
     }()
@@ -75,7 +76,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
         // Make sure the actually is a back camera on this particular iPhone.
         guard let backCamera = backCamera else {
-            showAlert(withTitle: "Camera error", message: "There seems to be no camera on your device.")
+            self.view.makeToast("There seems to be no camera on your camera!", duration: 3.0, position: .center)
             return
         }
 
@@ -84,7 +85,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             let captureDeviceInput = try AVCaptureDeviceInput(device: backCamera)
             captureSession.addInput(captureDeviceInput)
         } catch {
-            showAlert(withTitle: "Camera error", message: "Your camera can't be used as an input device.")
+            self.view.makeToast("There seems to be no camera on your camera!", duration: 3.0, position: .center)
             return
         }
 
@@ -145,7 +146,13 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 do {
                     try handler.perform([self.detectBarcodeRequest])
                 } catch {
-                    self.showAlert(withTitle: "Error Decoding Barcode", message: error.localizedDescription)
+                    if (self.captureRetries >= self.maxCaptureAttempts) {
+                        self.captureRetries = 0
+                    } else {
+                        self.captureRetries += 1
+                        self.captureImage()
+                    }
+                    //self.showAlert(withTitle: "Error Decoding Barcode", message: error.localizedDescription)
                 }
             }
             
@@ -156,22 +163,55 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         DispatchQueue.main.async {
             if let bestResult = request.results?.first as? VNBarcodeObservation,
                 let payload = bestResult.payloadStringValue {
-                //self.showInfo(for: payload)
-
-                //add logic to check if item is in inventory, if not, present "add new item" screen and then pop back
-                //if item does exist, add / remove based on the (currently nonexistent) options on this screen
-                //currently just presenting inventory view
-//                let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
-//                let viewController = storyboard.instantiateViewController(withIdentifier: "Inventory") as! InventoryViewController
-//                viewController.modalPresentationStyle = .overCurrentContext
-//                viewController.newlyScannedItem = payload
-//                self.present(viewController, animated: true, completion: nil)
-                 self.showAlert(withTitle: "UPC", message: payload)
+                    self.captureRetries = 0
+                    //self.showAlert(withTitle: "UPC", message: payload)
+                if(DBHelper().doesSKUExist(payload)) {
+                    //Handle modifications based on current screen options
+                } else {
+                    
+                    let response = APINetworkRequestController().makeUPCRequest(payload) { (success, json) in
+                        
+                        if(success) {
+                            print(json)
+                            var newItem = Item()
+                            newItem.sku = payload
+                            
+                            //Present new item view
+                            let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
+                            let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
+                            viewController.modalPresentationStyle = .overCurrentContext
+                            viewController.isImportingNewItem = true
+                            viewController.currentItem = newItem
+                            self.present(viewController, animated: true, completion: nil)
+                        } else {
+                            print("error!")
+                        }
+                        
+                    }
+                    
+//                    var newItem = Item()
+//                    newItem.sku = payload
+//
+//                    //Present new item view
+//                    let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
+//                    let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
+//                    viewController.modalPresentationStyle = .overCurrentContext
+//                    viewController.isImportingNewItem = true
+//                    viewController.currentItem = newItem
+//                    self.present(viewController, animated: true, completion: nil)
+                }
                 
             } else {
                 //TODO: Start timer on fail instead of immediately throwing an error
                 //Capture and process an image every .5 sec for 10 tries, after 10 fails throw an error and stop timer
-                self.showAlert(withTitle: "Unable to extract Results", message: "Cannot extract barcode info.")
+                //self.showAlert(withTitle: "Unable to extract Results", message: "Cannot extract barcode info.")
+                if (self.captureRetries >= self.maxCaptureAttempts) {
+                    self.captureRetries = 0
+                    self.view.makeToast("Couldn't scan! Try again...", duration: 3.0, position: .center)
+                } else {
+                    self.captureRetries += 1
+                    self.captureImage()
+                }
             }
         }
     }
@@ -246,6 +286,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     func showInfo(for payload: String) {
         showAlert(withTitle: "SKU", message: payload)
     }
+    
     
     //MARK: Goodbye
     @IBAction func backButtonPressed(_ sender: Any) {

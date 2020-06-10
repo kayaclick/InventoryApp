@@ -11,6 +11,7 @@ import UIKit
 
 class ItemMaintenanceViewController: UIViewController {
     var currentItem: Item!
+    var isImportingNewItem: Bool = false
     
     @IBOutlet weak var barButtonBack: UIBarButtonItem!
     @IBOutlet weak var barButtonSave: UIBarButtonItem!
@@ -24,15 +25,22 @@ class ItemMaintenanceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (isImportingNewItem) {
+            self.view.makeToast("New Item! Let's add it now.", duration: 1.5, position: .center)
+            //importItemData()
+        }
+        
         loadData()
+        
+        
     }
     
 
     
     func loadData() {
         if(currentItem == nil) { //No selected item passed in
-            //currentItem = Item()
-            currentItem = DBHelper().getDoc("test1") //load test doc
+            currentItem = Item()
+            //currentItem = DBHelper().getDoc("test1") //load test doc
         }
         
         //load fields
@@ -45,13 +53,25 @@ class ItemMaintenanceViewController: UIViewController {
         urlField.text       = currentItem.imageURL //TODO: Go away
     }
     
-    
+    func importItemData() {
+        //do network query and populate data
+        let response = APINetworkRequestController().makeUPCRequest(currentItem.sku) { (success, json) in
+            
+            if(success) {
+                print(json)
+            } else {
+                print("error!")
+            }
+            
+        }
+        
+    }
     
     
     
     //MARK: TODO
     @IBAction func saveButtonPressed(_ sender: Any) {
-        if (nameField.text == nil || nameField.text == "") {
+        if (skuField.text == nil || skuField.text == "") {
             print("throw err!")
         } else {
             
