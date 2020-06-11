@@ -8,10 +8,13 @@
 
 import Foundation
 import UIKit
+import Toast
 
-class ItemMaintenanceViewController: UIViewController {
+class ItemMaintenanceViewController: UIViewController, UITextFieldDelegate {
+    
     var currentItem: Item!
     var isImportingNewItem: Bool = false
+    
     
     @IBOutlet weak var barButtonBack:   UIBarButtonItem!
     @IBOutlet weak var barButtonSave:   UIBarButtonItem!
@@ -23,25 +26,25 @@ class ItemMaintenanceViewController: UIViewController {
     @IBOutlet weak var asinField:       UITextField!
     @IBOutlet weak var urlField:        UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (isImportingNewItem) {
-            self.view.makeToast("New Item! Let's add it now.", duration: 1.5, position: .center)
-            //importItemData()
-        }
-        
         loadData()
     }
     
-    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.view.endEditing(true);
+    //MARK: TODO qty field return
+    
+    //Resigns keyboard on return key
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     
+    //MARK: Load Data
     func loadData() {
-        if(currentItem == nil) { //No selected item passed in
+        if(currentItem == nil) { //No selected item passed in somehow
             currentItem = Item()
-            //currentItem = DBHelper().getDoc("test1") //load test doc
         }
         
         //load fields
@@ -51,29 +54,31 @@ class ItemMaintenanceViewController: UIViewController {
         brandField.text     = currentItem.brand
         elidField.text      = currentItem.elid
         asinField.text      = currentItem.asin
-        urlField.text       = currentItem.imageURL //TODO: Go away
+        
+        if (isImportingNewItem) { //Make network request, override defaults with retreived info
+            importItemData()
+            self.view.makeToast("New Item! Let's add it now.", duration: 1.5, position: .center)
+        }
     }
     
+    
+    //MARK: TODO net req
     func importItemData() {
         //do network query and populate data
-        let response = APINetworkRequestController().makeUPCRequest(currentItem.sku) { (success, json) in
-            
-            if(success) {
-                print(json)
-            } else {
-                print("error!")
-            }
-            
-        }
+        var response = APINetworkRequestController().makeUPCRequest(currentItem.sku)
+        
+        print(response)
         
     }
     
     
     
-    //MARK: TODO
+    //MARK: Save Data
     @IBAction func saveButtonPressed(_ sender: Any) {
-        if (skuField.text == nil || skuField.text == "") {
-            print("throw err!")
+        if (skuField.text == "") {
+            self.view.makeToast("Cannot save! Document must have a SKU!", duration: 3, position: .center)
+        } else if (nameField.text == "" || qtyField.text == "") {
+            self.view.makeToast("Cannot save! Check your fields as required fields are missing!", duration: 3, position: .center)
         } else {
             
             currentItem.name        = nameField.text!
@@ -84,12 +89,11 @@ class ItemMaintenanceViewController: UIViewController {
             currentItem.asin        = asinField.text!
             currentItem.imageURL    = urlField.text!
             
-            
             DBHelper().saveDoc(skuField.text!, currentItem)
         }
     }
     
-    //Goodbye
+    //MARK: Goodbye
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

@@ -12,28 +12,33 @@ class APINetworkRequestController {
     var baseURL = "https://api.upcitemdb.com/prod/trial/lookup?upc="
     
     
-    //Makes request using UPCITEMDB API to retreive
-    func makeUPCRequest(_ UPC: String, comp: @escaping (Bool, NSDictionary) -> ()) {
+    //Makes request using UPCITEMDB API to retreive relevant item data from SKU
+    func makeUPCRequest(_ UPC: String) -> NSMutableDictionary {
         let url = baseURL + UPC
         let request = URLRequest(url: URL(string: url)!)
         let session = URLSession.shared
-        var res: NSDictionary?
-        
+        var res: NSMutableDictionary?
+        let semaphore = DispatchSemaphore(value: 0)
         session.dataTask(with: request) {(data, response, error) -> Void in
             if (error != nil) {
                 print(error!.localizedDescription)
-                return
+                semaphore.signal()
             }
             
             do {
-                res = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
-                comp(true, res!)
+                res = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSMutableDictionary
+                res!["success"] = true
+                semaphore.signal()
             } catch {
                 print(error.localizedDescription)
-                comp(false, res!)
+                semaphore.signal()
             }
         }.resume()
-        
+        _ = semaphore.wait(timeout: DispatchTime.distantFuture)
+        if (res == nil) {
+            res!["success"] = false
+        }
+        return res!
         
     }
     
