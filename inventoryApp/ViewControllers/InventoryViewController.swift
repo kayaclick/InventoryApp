@@ -9,17 +9,12 @@
 import Foundation
 import UIKit
 import Toast
-class InventoryViewController: UIViewController {
+class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var item: Item!
+    var itemIndex: NSMutableArray!
     @IBOutlet weak var barBackButton: UIBarButtonItem!
     @IBOutlet weak var barAddItemButton: UIBarButtonItem!
     @IBOutlet weak var testUPCTextField: UILabel!
-    
-    @IBOutlet weak var testBtn1: UIButton!
-    @IBOutlet weak var testBtn2: UIButton!
-    
-
 
     var newlyScannedItem: String = ""
     
@@ -28,44 +23,41 @@ class InventoryViewController: UIViewController {
         loadData()
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
     }
     
+    
     func loadData() {
-        //testUPCTextField.text = newlyScannedItem
+        itemIndex = DBHelper().getDocList()
     }
     
-    @IBAction func testBtn1Press(_ sender: Any) {
-        //self.view.makeToast("Test")
-//        var doc = DBHelper().getDoc("test1")
-//        doc.qty = doc.qty + 1
-//        DBHelper().saveDoc("test1", doc)
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return itemIndex.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = DBHelper().getDoc(itemIndex![indexPath.row] as! String)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell")
         
-    }
-    @IBAction func testBtn2Press(_ sender: Any) {
+        (cell?.contentView.viewWithTag(1) as! UILabel).text = item.name
+        (cell?.contentView.viewWithTag(2) as! UILabel).text = item.sku
         
-        //print(UserDefaults.standard.dictionary(forKey: "1"))
-        var doc = DBHelper().getDoc("test1")
-        //doc.qty = 1
-        print(doc)
+        return cell!
     }
     
     
-    
-    @IBAction func testQuery(_ sender: Any) {
-        
-        let upc = "885909950805"
-        let response = APINetworkRequestController().makeUPCRequest(upc) { (success, json) in
-            
-            if(success) {
-                print(json)
-            } else {
-                print("error!")
-            }
-            
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.currentItem = DBHelper().getDoc(itemIndex[indexPath.row] as! String)
+        self.present(viewController, animated: true, completion: nil)
     }
+    
     
     //MARK: Add Item
     @IBAction func barAddItemPressed(_ sender: Any) {
@@ -82,3 +74,16 @@ class InventoryViewController: UIViewController {
     }
 }
 
+//    @IBAction func testQuery(_ sender: Any) {
+//
+//        let upc = "885909950805"
+//        let response = APINetworkRequestController().makeUPCRequest(upc) { (success, json) in
+//
+//            if(success) {
+//                print(json)
+//            } else {
+//                print("error!")
+//            }
+//
+//        }
+//    }

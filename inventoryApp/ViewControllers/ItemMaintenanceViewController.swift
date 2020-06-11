@@ -13,15 +13,15 @@ class ItemMaintenanceViewController: UIViewController {
     var currentItem: Item!
     var isImportingNewItem: Bool = false
     
-    @IBOutlet weak var barButtonBack: UIBarButtonItem!
-    @IBOutlet weak var barButtonSave: UIBarButtonItem!
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var skuField: UITextField!
-    @IBOutlet weak var qtyField: UITextField!
-    @IBOutlet weak var brandField: UITextField!
-    @IBOutlet weak var elidField: UITextField!
-    @IBOutlet weak var asinField: UITextField!
-    @IBOutlet weak var urlField: UITextField!
+    @IBOutlet weak var barButtonBack:   UIBarButtonItem!
+    @IBOutlet weak var barButtonSave:   UIBarButtonItem!
+    @IBOutlet weak var nameField:       UITextField!
+    @IBOutlet weak var skuField:        UITextField!
+    @IBOutlet weak var qtyField:        UITextField!
+    @IBOutlet weak var brandField:      UITextField!
+    @IBOutlet weak var elidField:       UITextField!
+    @IBOutlet weak var asinField:       UITextField!
+    @IBOutlet weak var urlField:        UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +31,12 @@ class ItemMaintenanceViewController: UIViewController {
         }
         
         loadData()
-        
-        
     }
     
-
+    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.view.endEditing(true);
+    }
+    
     
     func loadData() {
         if(currentItem == nil) { //No selected item passed in

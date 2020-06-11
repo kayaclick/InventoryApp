@@ -169,36 +169,36 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                     //Handle modifications based on current screen options
                 } else {
                     
-                    let response = APINetworkRequestController().makeUPCRequest(payload) { (success, json) in
-                        
-                        if(success) {
-                            print(json)
-                            var newItem = Item()
-                            newItem.sku = payload
-                            
-                            //Present new item view
-                            let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
-                            let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
-                            viewController.modalPresentationStyle = .overCurrentContext
-                            viewController.isImportingNewItem = true
-                            viewController.currentItem = newItem
-                            self.present(viewController, animated: true, completion: nil)
-                        } else {
-                            print("error!")
-                        }
-                        
-                    }
+//                    let response = APINetworkRequestController().makeUPCRequest(payload) { (success, json) in
+//                        
+//                        if(success) {
+//                            print(json)
+//                            var newItem = Item()
+//                            newItem.sku = payload
+//                            
+//                            //Present new item view
+//                            let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
+//                            let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
+//                            viewController.modalPresentationStyle = .overCurrentContext
+//                            viewController.isImportingNewItem = true
+//                            viewController.currentItem = newItem
+//                            self.present(viewController, animated: true, completion: nil)
+//                        } else {
+//                            print("error!")
+//                        }
+//                        
+//                    }
                     
-//                    var newItem = Item()
-//                    newItem.sku = payload
-//
-//                    //Present new item view
-//                    let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
-//                    let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
-//                    viewController.modalPresentationStyle = .overCurrentContext
-//                    viewController.isImportingNewItem = true
-//                    viewController.currentItem = newItem
-//                    self.present(viewController, animated: true, completion: nil)
+                    var newItem = Item()
+                    newItem.sku = payload
+
+                    //Present new item view
+                    let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
+                    viewController.modalPresentationStyle = .overCurrentContext
+                    viewController.isImportingNewItem = true
+                    viewController.currentItem = newItem
+                    self.present(viewController, animated: true, completion: nil)
                 }
                 
             } else {
