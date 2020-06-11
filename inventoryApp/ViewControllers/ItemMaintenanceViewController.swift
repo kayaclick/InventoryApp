@@ -66,7 +66,24 @@ class ItemMaintenanceViewController: UIViewController, UITextFieldDelegate {
     func importItemData() {
         //do network query and populate data
         var response = APINetworkRequestController().makeUPCRequest(currentItem.sku)
+        let parsedRes = (response["items"] as! NSArray)[0] as! NSDictionary
+        elidField.text = parsedRes["elid"] as! String
+        brandField.text = parsedRes["brand"] as! String
+        nameField.text = parsedRes["description"] as! String
         
+        /*
+         returns:
+         description
+         category
+         brand
+         ean
+         weight
+         title
+         upc
+         images []
+         elid
+         model
+         */
         print(response)
         
     }
