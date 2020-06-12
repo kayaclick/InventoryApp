@@ -15,6 +15,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zGR-EU-7UF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fEU-H5-n6y">
                                 <rect key="frame" x="-7" y="33" width="421" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -42,11 +47,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F9H-Wy-PKD">
-                                <rect key="frame" x="20" y="84" width="137" height="32"/>
+                                <rect key="frame" x="20" y="85" width="175" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="Add"/>
-                                    <segment title="Remove"/>
+                                    <segment title="Increment"/>
+                                    <segment title="Decrement"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -55,6 +60,7 @@
                     </view>
                     <connections>
                         <outlet property="barButtonBack" destination="zYM-QY-bn8" id="90Y-cH-sgB"/>
+                        <outlet property="navbarBackgroundView" destination="zGR-EU-7UF" id="OSg-2B-alI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BWP-a0-bJp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

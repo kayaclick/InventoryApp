@@ -14,10 +14,24 @@ class ItemMaintenanceViewController: UIViewController, UITextFieldDelegate {
     
     var currentItem: Item!
     var isImportingNewItem: Bool = false
+    @IBOutlet weak var backgroundView: UIView!
     
-    
+    //Nav
+    @IBOutlet weak var navigationBar:   UINavigationBar!
     @IBOutlet weak var barButtonBack:   UIBarButtonItem!
     @IBOutlet weak var barButtonSave:   UIBarButtonItem!
+    
+    //Labels
+    @IBOutlet weak var nameLbl:     UILabel!
+    @IBOutlet weak var skuLbl:      UILabel!
+    @IBOutlet weak var qtyLbl:      UILabel!
+    @IBOutlet weak var brandLbl:    UILabel!
+    @IBOutlet weak var elidLbl:     UILabel!
+    @IBOutlet weak var asinLbl:     UILabel!
+    @IBOutlet weak var categoryLbl: UILabel!
+    
+    
+    //Fields
     @IBOutlet weak var nameField:       UITextField!
     @IBOutlet weak var skuField:        UITextField!
     @IBOutlet weak var qtyField:        UITextField!
@@ -25,10 +39,13 @@ class ItemMaintenanceViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var elidField:       UITextField!
     @IBOutlet weak var asinField:       UITextField!
     @IBOutlet weak var urlField:        UITextField!
+    @IBOutlet weak var categoryField:   UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor       = staticVars().accentColour
+        backgroundView.backgroundColor  = staticVars().backgroundColour
         loadData()
     }
     
@@ -43,6 +60,8 @@ class ItemMaintenanceViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Load Data
     func loadData() {
+        navigationBar.backgroundColor   = staticVars().accentColour
+        navigationBar.tintColor         = staticVars().accentColourTwo
         if(currentItem == nil) { //No selected item passed in somehow
             currentItem = Item()
         }

@@ -25,6 +25,8 @@
 		13B4BF24248DC514006DB1DA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B4BF23248DC514006DB1DA /* Item.swift */; };
 		13BDDBD224875C6300139654 /* ItemMaintenanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */; };
 		13CA38C7249084880080EC07 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 13CA38C6249084880080EC07 /* Toast */; };
+		13E672BA24934BFA0028F5EC /* Export.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13E672B924934BFA0028F5EC /* Export.storyboard */; };
+		13E672BC24934C0A0028F5EC /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E672BB24934C0A0028F5EC /* ExportViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		13B4BF21248CBB5A006DB1DA /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		13B4BF23248DC514006DB1DA /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMaintenanceViewController.swift; sourceTree = "<group>"; };
+		13E672B924934BFA0028F5EC /* Export.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Export.storyboard; sourceTree = "<group>"; };
+		13E672BB24934C0A0028F5EC /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 				1387598D2476419F00740BFC /* Inventory.storyboard */,
 				13AB3D662476447C000A7419 /* Scan.storyboard */,
 				13AB3D6C24764534000A7419 /* Settings.storyboard */,
+				13E672B924934BFA0028F5EC /* Export.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 				13BDDBD124875C6300139654 /* ItemMaintenanceViewController.swift */,
 				13AB3D682476449E000A7419 /* ScanViewController.swift */,
 				13AB3D6A2476451B000A7419 /* SettingsViewController.swift */,
+				13E672BB24934C0A0028F5EC /* ExportViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 				1387598E2476419F00740BFC /* Inventory.storyboard in Resources */,
 				13AB3D672476447C000A7419 /* Scan.storyboard in Resources */,
 				13AB3D6D24764534000A7419 /* Settings.storyboard in Resources */,
+				13E672BA24934BFA0028F5EC /* Export.storyboard in Resources */,
 				138FAA2A2476338E00E38691 /* Assets.xcassets in Resources */,
 				138FAA282476338D00E38691 /* Main.storyboard in Resources */,
 			);
@@ -216,6 +223,7 @@
 			files = (
 				138FAA252476338D00E38691 /* ViewController.swift in Sources */,
 				138FAA372476350300E38691 /* MainVC.swift in Sources */,
+				13E672BC24934C0A0028F5EC /* ExportViewController.swift in Sources */,
 				13AB3D6B2476451B000A7419 /* SettingsViewController.swift in Sources */,
 				13875990247641F900740BFC /* InventoryViewController.swift in Sources */,
 				138FAA212476338D00E38691 /* AppDelegate.swift in Sources */,

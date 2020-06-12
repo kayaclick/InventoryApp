@@ -14,14 +14,15 @@ import Toast
 
 class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
-    var captureSession: AVCaptureSession!
-    var backCamera: AVCaptureDevice?
+    var backCamera:         AVCaptureDevice?
+    var captureOutput:      AVCapturePhotoOutput?
+    var shutterButton:      UIButton!
+    var captureSession:     AVCaptureSession!
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
-    var captureOutput: AVCapturePhotoOutput?
-    var shutterButton: UIButton!
     
-    var captureRetries = 0
-    var maxCaptureAttempts = 10 //MARK: TODO Make sys setting
+    var captureRetries      = 0
+    var maxCaptureAttempts  = 10 //MARK: TODO Make sys setting
+    @IBOutlet weak var navbarBackgroundView: UIView!
     
     @IBOutlet weak var barButtonBack: UIBarButtonItem!
     
@@ -39,6 +40,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     //MARK: ViewController Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        navbarBackgroundView.backgroundColor = staticVars().accentColour
         loadData()
     }
     

@@ -12,10 +12,11 @@ import Toast
 class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var itemIndex: NSMutableArray!
+    @IBOutlet weak var barObject: UINavigationBar!
     @IBOutlet weak var barBackButton: UIBarButtonItem!
     @IBOutlet weak var barAddItemButton: UIBarButtonItem!
-    @IBOutlet weak var testUPCTextField: UILabel!
-
+    @IBOutlet weak var tableView: UITableView!
+    
     var newlyScannedItem: String = ""
     
     override func viewDidLoad() {
@@ -23,14 +24,10 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         loadData()
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-    }
-    
-    
     func loadData() {
         itemIndex = DBHelper().getDocList()
+        tableView.backgroundColor = staticVars().backgroundColour
+        self.view.backgroundColor = staticVars().accentColour
     }
     
     
@@ -42,9 +39,10 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = DBHelper().getDoc(itemIndex![indexPath.row] as! String)
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell")
-        
+        cell!.backgroundColor = staticVars().backgroundColour
         (cell?.contentView.viewWithTag(1) as! UILabel).text = item.name
-        (cell?.contentView.viewWithTag(2) as! UILabel).text = item.sku
+        (cell?.contentView.viewWithTag(1) as! UILabel).textColor = staticVars().textColour
+        //(cell?.contentView.viewWithTag(2) as! UILabel).text = item.sku
         
         return cell!
     }

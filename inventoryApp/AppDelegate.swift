@@ -9,7 +9,13 @@
 import UIKit
 
 struct staticVars {
-    let versionNum = "V0.0.1"
+    let versionNum          = "V0.0.1"
+    var backgroundColour    = #colorLiteral(red: 0.2662798464, green: 0.3903673589, blue: 0.5146622658, alpha: 1)
+    var foreGroundColor     = #colorLiteral(red: 0.7098039216, green: 0.3960784314, blue: 0.462745098, alpha: 1)
+    var textColour          = #colorLiteral(red: 0.9176470588, green: 0.6745098039, blue: 0.5450980392, alpha: 1)
+    var accentColour        = #colorLiteral(red: 0.8980392157, green: 0.4196078431, blue: 0.4352941176, alpha: 1)
+    var accentColourTwo     = #colorLiteral(red: 0.4274509804, green: 0.3490196078, blue: 0.4784313725, alpha: 1)
+    
 }
 
 @UIApplicationMain
@@ -17,9 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //TODO add styles to toasts
     //Add colour scheme option
 
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UINavigationBar.appearance().backgroundColor = staticVars().accentColour
+        UINavigationBar.appearance().barTintColor = staticVars().accentColour
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = staticVars().accentColourTwo
+        //let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+        //statusBar?.backgroundColor = staticVars().accentColour
+        
         return true
     }
 
