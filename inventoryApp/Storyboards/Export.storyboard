@@ -30,6 +30,9 @@
                                         <rect key="frame" x="8" y="130" width="79" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Export CSV"/>
+                                        <connections>
+                                            <action selector="exportCSVPressed:" destination="k7b-Hl-zY5" eventType="touchUpInside" id="uoa-ih-hCm"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLS-wn-wML">
                                         <rect key="frame" x="8" y="529" width="79" height="30"/>
@@ -60,6 +63,7 @@
                         <outlet property="backgroundView" destination="PeA-4N-zsZ" id="0Hs-02-3jC"/>
                         <outlet property="barBackButton" destination="X7U-nN-M84" id="7cW-kV-tbe"/>
                         <outlet property="docCountLbl" destination="p28-YQ-eNW" id="gPP-XS-ZUe"/>
+                        <outlet property="exportCSV" destination="IaK-Jc-XUN" id="jZG-Cb-nbo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Fs-4V-fCc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
