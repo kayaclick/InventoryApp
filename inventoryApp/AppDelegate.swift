@@ -9,11 +9,11 @@
 import UIKit
 
 struct staticVars {
-    let versionNum          = "V0.0.1"
-    var backgroundColour    = #colorLiteral(red: 0.2662798464, green: 0.3903673589, blue: 0.5146622658, alpha: 1)
+    let versionNum          = "ALPHA"//"V0.0.1"
+    var backgroundColour    = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     var foreGroundColor     = #colorLiteral(red: 0.7098039216, green: 0.3960784314, blue: 0.462745098, alpha: 1)
-    var textColour          = #colorLiteral(red: 0.9176470588, green: 0.6745098039, blue: 0.5450980392, alpha: 1)
-    var accentColour        = #colorLiteral(red: 0.8980392157, green: 0.4196078431, blue: 0.4352941176, alpha: 1)
+    var textColour          = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    var accentColour        = #colorLiteral(red: 0.5787474513, green: 0.3215198815, blue: 0, alpha: 1)
     var accentColourTwo     = #colorLiteral(red: 0.4274509804, green: 0.3490196078, blue: 0.4784313725, alpha: 1)
     
 }

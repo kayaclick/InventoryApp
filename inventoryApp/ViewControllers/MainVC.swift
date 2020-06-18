@@ -26,6 +26,7 @@ extension UINavigationController {
 
 class MainVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var versionLbl: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var mainOptMenu: UITableView!
     var pages: [String] = [ "Inventory",
@@ -47,6 +48,7 @@ class MainVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func loadData() {
         backgroundView.backgroundColor  = staticVars().accentColour
         mainOptMenu.backgroundColor     = staticVars().backgroundColour
+        versionLbl.text                 = staticVars().versionNum
     }
     
     

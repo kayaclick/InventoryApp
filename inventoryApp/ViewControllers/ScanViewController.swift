@@ -22,8 +22,12 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     var captureRetries      = 0
     var maxCaptureAttempts  = 10 //MARK: TODO Make sys setting
-    @IBOutlet weak var navbarBackgroundView: UIView!
     
+    @IBOutlet weak var incDecSlider: UISegmentedControl!
+    @IBOutlet weak var qtyField: UITextField!
+    
+    
+    @IBOutlet weak var navbarBackgroundView: UIView!
     @IBOutlet weak var barButtonBack: UIBarButtonItem!
     
     lazy var detectBarcodeRequest: VNDetectBarcodesRequest = {
@@ -169,6 +173,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                     //self.showAlert(withTitle: "UPC", message: payload)
                 if(DBHelper().doesSKUExist(payload)) {
                     //Handle modifications based on current screen options
+                    self.updateItem(payload)
                 } else {
                     
                     var newItem = Item()
@@ -268,6 +273,16 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     func showInfo(for payload: String) {
         showAlert(withTitle: "SKU", message: payload)
     }
+    
+    func updateItem(_ SKU: String) {
+        print(incDecSlider.titleForSegment(at: incDecSlider.selectedSegmentIndex))
+        if (incDecSlider.titleForSegment(at: incDecSlider.selectedSegmentIndex) == "Increment") {
+             
+        } else {
+            
+        }
+    }
+    
     
     
     //MARK: Goodbye

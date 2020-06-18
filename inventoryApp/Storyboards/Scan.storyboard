@@ -33,11 +33,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rxO-S3-cIa">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rxO-S3-cIa">
                                 <rect key="frame" x="311" y="84" width="83" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="QTY:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URn-DX-K9o">
                                 <rect key="frame" x="261" y="91" width="38" height="21"/>
@@ -60,7 +60,9 @@
                     </view>
                     <connections>
                         <outlet property="barButtonBack" destination="zYM-QY-bn8" id="90Y-cH-sgB"/>
+                        <outlet property="incDecSlider" destination="F9H-Wy-PKD" id="FSg-Hx-FJC"/>
                         <outlet property="navbarBackgroundView" destination="zGR-EU-7UF" id="OSg-2B-alI"/>
+                        <outlet property="qtyField" destination="rxO-S3-cIa" id="2xG-0q-Rvu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BWP-a0-bJp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
