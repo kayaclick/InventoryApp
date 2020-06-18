@@ -275,12 +275,14 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func updateItem(_ SKU: String) {
-        print(incDecSlider.titleForSegment(at: incDecSlider.selectedSegmentIndex))
+        //print(incDecSlider.titleForSegment(at: incDecSlider.selectedSegmentIndex))
+        var item = DBHelper().getDoc(SKU)
         if (incDecSlider.titleForSegment(at: incDecSlider.selectedSegmentIndex) == "Increment") {
-             
+            item.qty += Int(qtyField.text!)!
         } else {
-            
+            item.qty -= Int(qtyField.text!)!
         }
+        DBHelper().saveDoc(SKU, item)
     }
     
     
