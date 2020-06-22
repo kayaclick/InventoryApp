@@ -42,7 +42,7 @@ class ExportViewController: UIViewController {
         
         for docid in index { //Iterate doc list and pull doc info
             let doc = DBHelper().getDoc(docid as! String)
-            let tempString = "\(doc.sku),\(doc.qty),\(doc.name),\(doc.imageURL),\(doc.brand),\(doc.asin),\(doc.elid)\n"
+            let tempString = "\(doc.sku),\(doc.qty),\(doc.name),\(doc.imageURL),\(doc.brand),\(doc.asin),\(doc.elid)\n" //TODO Parse data to guarantee it is safe for CSV
             csvText.append(tempString)
             
         }

@@ -154,6 +154,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 } catch {
                     if (self.captureRetries >= self.maxCaptureAttempts) {
                         self.captureRetries = 0
+                        self.view.makeToast("Failed to scan, try again.", duration: 1.5, position: .center)
                     } else {
                         self.captureRetries += 1
                         self.captureImage()

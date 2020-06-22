@@ -31,7 +31,7 @@ class MainVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var mainOptMenu: UITableView!
     var pages: [String] = [ "Inventory",
                             "Scan",
-                            "Import / Export",
+                            //"Import / Export",
                             "Settings",
                             "Upgrade"
                             ]
