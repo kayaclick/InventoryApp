@@ -49,6 +49,20 @@ class ItemMaintenanceViewController: UIViewController, UITextFieldDelegate {
         loadData()
     }
     
+    
+    //Tap on screen anywhere to drop keyboard
+    //Very useful snippit!
+    func setupHideKeyboardOnTap() {
+        self.view.addGestureRecognizer(self.endEditingRecognizer() )
+    }
+    
+    private func endEditingRecognizer() -> UIGestureRecognizer{
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        return tap
+    }
+    
+    
     //MARK: TODO qty field return
     
     //Resigns keyboard on return key

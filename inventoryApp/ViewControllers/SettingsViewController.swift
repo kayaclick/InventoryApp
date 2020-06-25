@@ -12,22 +12,31 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var barBackButton: UIBarButtonItem!
+    @IBOutlet weak var numOfRetriesField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-    }
+
     
     func loadData() {
-        
+        numOfRetriesField.text = String(UserDefaults.standard.integer(forKey: "numberOfScanRetries"))
         
         
     }
     
+    
+    
+    //Reconfigures settings in runtime
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        save()
+    }
+
+    func save() {
+        UserDefaults.standard.set(Int(numOfRetriesField.text!), forKey: "numberOfScanRetries")
+    }
     
     //Goodbye
     @IBAction func backButtonPressed(_ sender: Any) {

@@ -26,13 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
         UINavigationBar.appearance().backgroundColor = staticVars().accentColour
         UINavigationBar.appearance().barTintColor = staticVars().accentColour
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = staticVars().accentColourTwo
-        //let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-        //statusBar?.backgroundColor = staticVars().accentColour
         
         return true
     }
