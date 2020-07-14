@@ -99,25 +99,33 @@ class ItemMaintenanceViewController: UIViewController, UITextFieldDelegate {
     func importItemData() {
         //do network query and populate data
         var response = APINetworkRequestController().makeUPCRequest(currentItem.sku)
-        let parsedRes = (response["items"] as! NSArray)[0] as! NSDictionary
-        elidField.text = parsedRes["elid"] as! String
-        brandField.text = parsedRes["brand"] as! String
-        nameField.text = parsedRes["description"] as! String
+
+        if (response["code"] != nil && response["code"] as! String == "OK") {
+            let parsedRes = (response["items"] as! NSArray)[0] as! NSDictionary
+            elidField.text = parsedRes["elid"] as! String
+            brandField.text = parsedRes["brand"] as! String
+            nameField.text = parsedRes["title"] as! String
+            
+            /*
+             returns:
+             description
+             category
+             brand
+             ean
+             weight
+             title
+             upc
+             images []
+             elid
+             model
+             */
+            print(response)
+        } else if (response["message"] != nil){ //some sort of error occursed but we got a response
+            self.view.makeToast("Could not pull or parse data automatically, error: \(response["message"])")
+        } else { //Your internet is probably borked
+            self.view.makeToast("An unknown error occured pulling item data. No fields could be populated.")
+        }
         
-        /*
-         returns:
-         description
-         category
-         brand
-         ean
-         weight
-         title
-         upc
-         images []
-         elid
-         model
-         */
-        print(response)
         
     }
     

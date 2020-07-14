@@ -16,6 +16,7 @@ struct Item {
     var brand = ""
     var asin = ""
     var elid = ""
+    var par = ""
     
     var dictionary: [String: Any] {
         return [
@@ -25,7 +26,8 @@ struct Item {
             "imageURL": imageURL,
             "brand":    brand,
             "asin":     asin,
-            "elid":     elid
+            "elid":     elid,
+            "par":      par
             //catagory field
                 ]
     }
@@ -47,5 +49,6 @@ extension Item: Codable {
                 case brand
                 case asin
                 case elid
+                case par
     }
 }

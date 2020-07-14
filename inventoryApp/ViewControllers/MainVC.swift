@@ -33,7 +33,8 @@ class MainVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                             "Scan",
                             //"Import / Export",
                             "Settings",
-                            "Upgrade"
+                            "Upgrade",
+                            "Reports"
                             ]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +94,11 @@ class MainVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             viewController.modalPresentationStyle = .overCurrentContext
             present(viewController, animated: true, completion: nil)
             
+        } else if (sb == "Reports") {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Reports", bundle: nil)
+            let viewController = storyboard.instantiateViewController(identifier: "Reports") as! ReportsViewController
+            viewController.modalPresentationStyle = .overCurrentContext
+            present(viewController, animated: true, completion: nil)
         }
 //        let storyboard: UIStoryboard = UIStoryboard(name: "Printer", bundle: nil)
 //        let vc = storyboard.instantiateViewController(withIdentifier: "PrinterController") as! PrinterViewController
