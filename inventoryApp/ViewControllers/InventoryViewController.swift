@@ -12,6 +12,7 @@ import Toast
 class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var itemIndex: NSMutableArray!
+    var filteredItemIndex: NSMutableArray!
     @IBOutlet weak var barObject: UINavigationBar!
     @IBOutlet weak var barBackButton: UIBarButtonItem!
     @IBOutlet weak var barAddItemButton: UIBarButtonItem!
@@ -26,18 +27,19 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
     
     func loadData() {
         itemIndex = DBHelper().getDocList()
+        filteredItemIndex = itemIndex
         tableView.backgroundColor = staticVars().backgroundColour
         self.view.backgroundColor = staticVars().accentColour
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemIndex.count
+        return filteredItemIndex.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = DBHelper().getDoc(itemIndex![indexPath.row] as! String)
+        let item = DBHelper().getDoc(filteredItemIndex![indexPath.row] as! String)
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell")
         cell!.backgroundColor = staticVars().backgroundColour
         (cell?.contentView.viewWithTag(1) as! UILabel).text = item.name
@@ -52,7 +54,7 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ItemMaintenance") as! ItemMaintenanceViewController
         viewController.modalPresentationStyle = .overCurrentContext
-        viewController.currentItem = DBHelper().getDoc(itemIndex[indexPath.row] as! String)
+        viewController.currentItem = DBHelper().getDoc(filteredItemIndex[indexPath.row] as! String)
         self.present(viewController, animated: true, completion: nil)
     }
     

@@ -29,7 +29,8 @@ class MainVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var versionLbl: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var mainOptMenu: UITableView!
-    var pages: [String] = [ "Inventory",
+    var pages: [String] = [ "Checkout",
+                            "Inventory",
                             "Scan",
                             //"Import / Export",
                             "Settings",
@@ -73,7 +74,13 @@ class MainVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     func transition(_ sb: String) {
-        if(sb == "Inventory") {
+        
+        if (sb == "Checkout") {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Checkout", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "Checkout") as! CheckoutViewController
+            viewController.modalPresentationStyle = .overCurrentContext
+            present(viewController, animated: true, completion: nil)
+        } else if(sb == "Inventory") {
             let storyboard: UIStoryboard = UIStoryboard(name: "Inventory", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "Inventory") as! InventoryViewController
             viewController.modalPresentationStyle = .overCurrentContext
