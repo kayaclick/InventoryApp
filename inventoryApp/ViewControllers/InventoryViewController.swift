@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Toast
-class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class InventoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var itemIndex: NSMutableArray!
     var filteredItemIndex: NSMutableArray!
@@ -17,6 +17,7 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var barBackButton: UIBarButtonItem!
     @IBOutlet weak var barAddItemButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var itemListSearchBar: UISearchBar!
     
     var newlyScannedItem: String = ""
     
@@ -58,6 +59,31 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         self.present(viewController, animated: true, completion: nil)
     }
     
+    //MARK: Search bar logic
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        simpleFilter(itemListSearchBar.text!)
+    }
+    
+    
+    //MARK: Filtering Logic
+    //This filters just by SKU, toggle option if verbose filtering gets super slow with lots of data
+    func simpleFilter(_ filterStr: String) {
+        itemIndex = DBHelper().getDocList()
+        filteredItemIndex = []
+        var tempArry: [String] = []
+        if (itemIndex.count > 0) {
+            for item in itemIndex {
+                //let itemData = DBHelper().getDoc(item as! String)
+                //if itemData.
+                if ((item as! String).contains(filterStr)) {
+                    tempArry.append(item as! String)
+                }
+            }
+        }
+        filteredItemIndex = NSMutableArray(array: tempArry)
+        tableView.reloadData()
+    }
     
     //MARK: Add Item
     @IBAction func barAddItemPressed(_ sender: Any) {
