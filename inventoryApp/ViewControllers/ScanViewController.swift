@@ -284,6 +284,7 @@ class ScanViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             item.qty -= Int(qtyField.text!)!
         }
         DBHelper().saveDoc(SKU, item)
+        self.view.makeToast("Updated item \(item.name)", duration: 1.3, position: .top)
     }
     
     

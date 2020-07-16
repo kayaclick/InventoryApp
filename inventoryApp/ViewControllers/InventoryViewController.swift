@@ -34,6 +34,8 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     
+    
+    //MARK: TableView logic
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredItemIndex.count
     }
@@ -59,31 +61,54 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         self.present(viewController, animated: true, completion: nil)
     }
     
+    
+    
     //MARK: Search bar logic
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        simpleFilter(itemListSearchBar.text!)
+        //TODO add simple / complex filter setting
+        if (true) {
+            fancyFilter(itemListSearchBar.text!)
+        } else {
+            simpleFilter(itemListSearchBar.text!)
+        }
+        
     }
+    
+    
     
     
     //MARK: Filtering Logic
     //This filters just by SKU, toggle option if verbose filtering gets super slow with lots of data
     func simpleFilter(_ filterStr: String) {
         itemIndex = DBHelper().getDocList()
-        filteredItemIndex = []
         var tempArry: [String] = []
-        if (itemIndex.count > 0) {
-            for item in itemIndex {
-                //let itemData = DBHelper().getDoc(item as! String)
-                //if itemData.
-                if ((item as! String).contains(filterStr)) {
-                    tempArry.append(item as! String)
-                }
+        for item in itemIndex {
+            if ((item as! String).contains(filterStr)) {
+                tempArry.append(item as! String)
             }
         }
         filteredItemIndex = NSMutableArray(array: tempArry)
         tableView.reloadData()
     }
+    
+    //Filter checks against SKU, name of item, and a few other cases instead of just SKU
+    func fancyFilter(_ filterStr: String) {
+        itemIndex = DBHelper().getDocList()
+        let filterStrLower = filterStr.lowercased()
+        var tempArry: [String] = []
+        for item in itemIndex {
+            let tempItem = DBHelper().getDoc(item as! String)
+            if (item as! String).contains(filterStrLower) || tempItem.name.lowercased().contains(filterStrLower) || tempItem.brand.lowercased().contains(filterStrLower){
+                tempArry.append(item as! String)
+            }
+        }
+        filteredItemIndex = NSMutableArray(array: tempArry)
+        tableView.reloadData()
+    }
+    
+    
+    
     
     //MARK: Add Item
     @IBAction func barAddItemPressed(_ sender: Any) {
@@ -94,22 +119,12 @@ class InventoryViewController: UIViewController, UITableViewDataSource, UITableV
         self.present(viewController, animated: true, completion: nil)
     }
     
+    
+    
+    
+    
     //MARK: Goodbye
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 }
-
-//    @IBAction func testQuery(_ sender: Any) {
-//
-//        let upc = "885909950805"
-//        let response = APINetworkRequestController().makeUPCRequest(upc) { (success, json) in
-//
-//            if(success) {
-//                print(json)
-//            } else {
-//                print("error!")
-//            }
-//
-//        }
-//    }
