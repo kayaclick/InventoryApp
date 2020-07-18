@@ -2,11 +2,15 @@
 
 TODO: 
 
-Figure out auto pictures for items
+Checkout functionality for items
 
-CSV Export
+Email receipts? 
 
-UI Design
+Figure out how to save images for items
+
+CSV Export / Import
+
+UI Design + app icon design
 
 Settings Config 
 
